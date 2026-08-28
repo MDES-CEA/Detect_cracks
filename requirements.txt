@@ -1,0 +1,10 @@
+# Dépendances de l'analyse de fissures.
+# Bornes basses = versions dont les API utilisées sont stables.
+# Versions exactes utilisées pour la mise au point : voir README.md.
+
+numpy>=1.24
+scipy>=1.10
+scikit-image>=0.21
+scikit-learn>=1.3
+matplotlib>=3.7
+pillow>=9.5
