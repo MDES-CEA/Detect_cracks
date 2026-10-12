@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Annotation des fissures</title>
+    <link rel="stylesheet" href="/static/styles.css?v=17">
+  </head>
+  <body>
+    <header class="app-header">
+      <div class="title-bar">
+        <strong>Fissures</strong>
+        <span id="image-name" class="image-name">Chargement…</span>
+        <span class="usage">Le glisser déplace toujours l’image</span>
+        <button id="open-analysis">Vue et mesures</button>
+        <div class="global-cracks-controls">
+          <button id="toggle-all-cracks" title="Afficher les fissures de toute la mosaïque">Toutes fissures</button>
+          <label title="Opacité de la couche globale"><span>Opac.</span> <input id="all-cracks-opacity" type="range" min="5" max="100" value="45" disabled></label>
+        </div>
+        <label class="annotator-field">
+          <span>Annotateur</span>
+          <input id="annotator" maxlength="80" placeholder="Nom">
+        </label>
+        <span id="server-status" class="connection loading" title="État du serveur"></span>
+      </div>
+
+      <div class="tool-bar" role="toolbar" aria-label="Annotation">
+        <div class="mode-switch" aria-label="Mode d’interaction">
+          <button id="mode-select" class="active"><kbd>V</kbd> Sélection</button>
+          <button id="mode-draw"><kbd>C</kbd> Tracer</button>
+          <button id="insert-node" disabled title="Sélectionner une fissure puis cliquer n'importe où sur son tracé pour insérer un nœud">+ Nœud</button>
+          <button id="undo-point" disabled title="Retirer le dernier point (Z)"><kbd>Z</kbd> Retirer point</button>
+          <button id="detect-cracks" disabled><kbd>A</kbd> Détecter</button>
+        </div>
+
+        <span class="separator"></span>
+
+        <div class="zone-nav">
+          <button id="previous-zone" title="Tuile précédente">‹</button>
+          <button id="current-zone" disabled>Aucune tuile</button>
+          <button id="next-zone" title="Tuile suivante">›</button>
+        </div>
+
+        <span class="separator"></span>
+
+        <div class="categories" aria-label="Catégorie de la fissure sélectionnée">
+          <button data-category="open" class="open" disabled><kbd>&amp;</kbd> Non colmatée</button>
+          <button data-category="filled" class="filled" disabled><kbd>é</kbd> Colmatée</button>
+          <button data-category="mixed" class="mixed" disabled>Mixte</button>
+          <button data-category="uncertain" class="uncertain" disabled><kbd>"</kbd> Incertaine</button>
+        </div>
+
+        <button id="delete-crack" class="delete-button" disabled>Supprimer <kbd>Suppr</kbd></button>
+
+        <span class="separator"></span>
+
+        <div class="tile-state" aria-label="État de la tuile">
+          <button data-zone-status="todo">Tuile non validée</button>
+          <button data-zone-status="done">Valider la tuile</button>
+        </div>
+
+        <span class="toolbar-spacer"></span>
+
+        <div class="display-controls">
+          <label title="Luminosité">Lum. <input id="brightness" type="range" min="50" max="180" value="100"><output id="brightness-value">100 %</output></label>
+          <label title="Contraste">Contr. <input id="contrast" type="range" min="50" max="250" value="100"><output id="contrast-value">100 %</output></label>
+          <button id="reset-display" title="Réinitialiser luminosité et contraste">100 %</button>
+          <button id="toggle-zones" title="Afficher la grille des tuiles">Grille</button>
+          <button id="toggle-traces" class="active" title="Afficher les fissures">Fissures</button>
+          <button id="home" title="Voir toute la mosaïque">Tout voir</button>
+          <button id="zoom-out" title="Dézoomer">−</button>
+          <button id="zoom-in" title="Zoomer">+</button>
+        </div>
+      </div>
+    </header>
+
+    <main class="canvas-shell">
+      <div id="viewer" aria-label="Visionneuse de la mosaïque"></div>
+
+      <div id="busy-indicator" class="busy-indicator hidden" aria-live="assertive">
+        <span id="busy-text">Calcul du chemin…</span>
+      </div>
+
+      <div id="image-category-palette" class="image-category-palette hidden" role="menu" aria-label="Catégoriser la fissure">
+        <span>Catégorie :</span>
+        <button data-palette-category="open" class="open"><kbd>&amp;</kbd> Non colmatée</button>
+        <button data-palette-category="filled" class="filled"><kbd>é</kbd> Colmatée</button>
+        <button data-palette-category="mixed" class="mixed">Mixte</button>
+        <button data-palette-category="uncertain" class="uncertain"><kbd>"</kbd> Incertaine</button>
+        <button id="palette-delete" class="delete">Supprimer</button>
+      </div>
+
+      <div class="status-bar">
+        <span id="action-status">Prêt</span>
+        <span id="selection-summary">Aucune fissure sélectionnée</span>
+        <span class="status-spacer"></span>
+        <span id="coordinates">x — · y — · zoom —</span>
+        <span id="zone-summary">0 fissure</span>
+      </div>
+
+      <div id="viewer-message" class="viewer-message">Préparation de l’image…</div>
+    </main>
+
+    <script src="/static/vendor/openseadragon.min.js"></script>
+    <script type="module" src="/static/app.js?v=21"></script>
+  </body>
+</html>
