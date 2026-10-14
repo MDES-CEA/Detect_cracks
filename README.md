@@ -1,8 +1,3 @@
-# Identification des fissures
-
-Tout ce qui sert au projet aujourd'hui. Les scripts abandonnés ou remplacés
-sont dans `..\anciens scripts\`.
-
 ## Lancer l'application
 
 Le dossier fonctionne **où qu'on le copie** : aucun chemin n'est écrit en dur.
