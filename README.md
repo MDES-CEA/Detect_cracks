@@ -16,24 +16,20 @@ Trois façons équivalentes :
 - **terminal** : `.\run_annotation_app.ps1`, avec `-Choisir` pour changer
   d'image.
 
-Ce qui se passe tout seul :
-
-- **premier lancement sur un poste** : l'environnement Python est créé dans
+  Au premier lancement sur le poste, l'environnement Python est créé dans
   `.venv\`, à côté du lanceur, avec exactement les versions du poste d'origine
-  (`constraints_annotation_app.txt`). Quelques minutes, environ 1 Go, une seule
-  fois. Il faut seulement un Python 3.10 à 3.13, 64 bits, installé sur le poste ;
-- **l'image** : la dernière ouverte sur ce poste. La première fois, une fenêtre
+  (`constraints_annotation_app.txt`). Quelques minutes, environ 1 Go.
+  Il faut seulement un Python 3.10 à 3.13, 64 bits, installé sur le poste ;
+  Pour le choix de l'image, la dernière ouverte sur ce poste. La première fois, une fenêtre
   demande de la choisir ;
-- **le port** : 8000, ou le suivant s'il est pris ;
-- **le navigateur** s'ouvre quand le serveur est prêt. `Ctrl+C` dans le
+  le navigateur s'ouvre quand le serveur est prêt. `Ctrl+C` dans le
   terminal arrête le serveur.
 
 Le mode d'emploi de l'interface est dans
 [`annotation_app/README.md`](annotation_app/README.md) : raccourcis, flux de
 travail.
 
-## Donner l'application à un collègue
-
+Pour donner l'appli avec ses données : 
 ```powershell
 .\preparer_copie.ps1 -Destination E:\
 ```
@@ -55,13 +51,17 @@ Sur un poste neuf, si l'installation échoue derrière un proxy, définir
 `$env:HTTPS_PROXY` avant de relancer. Si VS Code demande de faire confiance au
 dossier, accepter : les tâches de lancement en dépendent.
 
+Pour ne reprendre uniquement les données de fissures et d'annotations, il suffit de 
+copier le fichier sqlite3 dans "data" : "annotation_app\data". Ce fichier contient toute les infos 
+d'annotations mais permet uniquement de reprendre l'annotations tel quel. Pour ajouter un nouvel annotateur
+il faut accéder à l'appli sur le réseau OU la partager selon la manip ci-dessus. 
+
 ## Partager un serveur en réseau
 
 `-Partager` ouvre le serveur aux autres postes (par défaut, il n'écoute que
 le poste local). Le lanceur affiche alors les adresses utilisables, avec le
-nom de leur réseau : donner celle du réseau du laboratoire, pas celle d'un VPN
-ou d'un Wi-Fi. L'adresse est distribuée par DHCP et peut changer — relire la
-bannière à chaque lancement.
+nom de leur réseau : donner celle du réseau, pas celle d'un VPN
+ou d'un Wi-Fi. 
 
 **Sur un poste géré, le partage peut être bloqué sans recours de notre côté.**
 Il arrive que le pare-feu Windows soit désactivé par la stratégie de groupe et
